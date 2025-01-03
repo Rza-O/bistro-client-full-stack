@@ -2,9 +2,12 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../Context/AuthProvider';
 import { IoMdCart } from 'react-icons/io';
+import useCart from '../../../Hooks/useCart';
 
 const Navbar = () => {
    const { user, logOut } = useContext(AuthContext);
+   const [cart] = useCart();
+
 
    const handleLogOut = () => {
       logOut()
@@ -33,7 +36,7 @@ const Navbar = () => {
          <Link to='/'>
             <button className="btn">
                <IoMdCart className='mr-2 text-lg' />
-               <div className="badge badge-primary">+0</div>
+               <div className="badge badge-primary">+{ cart.length}</div>
             </button></Link>
       </li>
    </>
