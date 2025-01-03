@@ -32,13 +32,6 @@ const Navbar = () => {
             <li><Link to='/login'>Login</Link></li>
          </>
       }
-      <li>
-         <Link to='/'>
-            <button className="btn">
-               <IoMdCart className='mr-2 text-lg' />
-               <div className="badge badge-primary">+{ cart.length}</div>
-            </button></Link>
-      </li>
    </>
 
    return (
@@ -74,7 +67,11 @@ const Navbar = () => {
                </ul>
             </div>
             <div className="navbar-end">
-               <a className="btn">Button</a>
+               <Link to='/dashboard/cart'>
+                  <button className="btn">
+                     <IoMdCart className='mr-2 text-lg' />
+                     <div className="badge badge-primary">+{cart.length}</div>
+                  </button></Link>
             </div>
          </div>
       </>
