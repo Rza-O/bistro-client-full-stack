@@ -85,7 +85,8 @@ const Login = () => {
                         <button type='button' onClick={handleValidateCaptcha} className="btn btn-outline btn-xs mt-2">Validate</button>
                      </div>
                      <div className="form-control mt-6">
-                        <button disabled={disabled} className="btn btn-primary">Login</button>
+                        {/* TODO: apply disabled for reCaptcha */}
+                        <button disabled={false} className="btn btn-primary">Login</button>
                      </div>
                   </form>
                   <p><small>New Here? <Link to='/signup'>Create an account.</Link></small></p>
