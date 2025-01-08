@@ -4,6 +4,7 @@ import { AuthContext } from '../../Context/AuthProvider';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Swal from 'sweetalert2';
+import SocialLogin from '../../Components/SocialLogin/SocialLogin';
 
 const Login = () => {
    const captchaRef = useRef(null);
@@ -32,7 +33,7 @@ const Login = () => {
                draggable: true
             });
             navigate(location?.state ? location.state : '/')
-      })
+         })
 
    }
 
@@ -89,10 +90,12 @@ const Login = () => {
                         <button disabled={false} className="btn btn-primary">Login</button>
                      </div>
                   </form>
-                  <p><small>New Here? <Link to='/signup'>Create an account.</Link></small></p>
+                  <p className='px-6 py-3'><small>New Here? <Link to='/signup'>Create an account.</Link></small></p>
+                  <SocialLogin />
                </div>
             </div>
          </div>
+
       </>
    );
 };

@@ -4,9 +4,12 @@ import { FaStar } from 'react-icons/fa6';
 import { IoBookmarks } from 'react-icons/io5';
 import { NavLink, Outlet } from 'react-router-dom';
 import useCart from '../Hooks/useCart';
+import { MdEmail } from 'react-icons/md';
 
 const Dashboard = () => {
    const [cart] = useCart();
+   // TODO: get isAdmin value from databaseJ
+   const isAdmin = true;
    return (
       <div className='flex'>
          {/* Dashboard Sidebar */}
@@ -32,6 +35,7 @@ const Dashboard = () => {
                   <IoBookmarks></IoBookmarks>
                   My Bookings
                </NavLink></li>
+               {/* shared dashboard */}
                <div className="divider divider-neutral"></div>
                <li className=''><NavLink to='/'>
                   <FaHome></FaHome>
@@ -40,6 +44,10 @@ const Dashboard = () => {
                <li className=''><NavLink to='/menu'>
                   <FaSearch></FaSearch>
                   Menu
+               </NavLink></li>
+               <li className=''><NavLink to='/order/contact'>
+                  <MdEmail></MdEmail>
+                  Contact
                </NavLink></li>
             </ul>
          </div>

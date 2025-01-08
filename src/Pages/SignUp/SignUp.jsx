@@ -5,6 +5,7 @@ import { AuthContext } from '../../Context/AuthProvider';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import useAxiosPublic from '../../Hooks/useAxiosPublic';
+import SocialLogin from '../../Components/SocialLogin/SocialLogin';
 
 const SignUp = () => {
    const { createUser, updateUserProfile } = useContext(AuthContext);
@@ -109,7 +110,8 @@ const SignUp = () => {
                         <button className="btn btn-primary">Sign Up!</button>
                      </div>
                   </form>
-                  <p><small>Already Have <Link to='/login'>an account?</Link></small></p>
+                  <p className='px-6 py-3'><small>Already Have <Link to='/login'>an account?</Link></small></p>
+                  <SocialLogin />
                </div>
             </div>
          </div>
