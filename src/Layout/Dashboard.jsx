@@ -6,11 +6,14 @@ import { NavLink, Outlet } from 'react-router-dom';
 import useCart from '../Hooks/useCart';
 import { MdEmail } from 'react-icons/md';
 import { CiForkAndKnife } from 'react-icons/ci';
+import useAdmin from '../Hooks/useAdmin';
 
 const Dashboard = () => {
    const [cart] = useCart();
    // TODO: get isAdmin value from database
-   const isAdmin = true;
+   const [isAdmin] = useAdmin();
+   // console.log(isAdmin)
+   // const isAdmin = false;
    return (
       <div className='flex'>
          {/* Dashboard Sidebar */}
