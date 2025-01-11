@@ -12,7 +12,7 @@ const Dashboard = () => {
    const [cart] = useCart();
    // TODO: get isAdmin value from database
    const [isAdmin] = useAdmin();
-   // console.log(isAdmin)
+// console.log(isAdmin)
    // const isAdmin = false;
    return (
       <div className='flex'>
