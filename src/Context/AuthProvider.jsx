@@ -12,7 +12,7 @@ const AuthProvider = ({ children }) => {
    const googleProvider = new GoogleAuthProvider();
    const axiosPublic = useAxiosPublic();
 
-   const googleSignIn = () => { 
+   const googleSignIn = () => {
       setLoading(true);
       return signInWithPopup(auth, googleProvider)
    }
@@ -48,15 +48,17 @@ const AuthProvider = ({ children }) => {
                .then(res => {
                   if (res.data.token) {
                      localStorage.setItem('access-token', res.data.token);
-               }
-            })
+                     setLoading(false);
+                  }
+               })
          } else {
             // TODO: remove token(if token stored in the client side)
             localStorage.removeItem('access-token')
+            setLoading(false);
          }
-         setLoading(false);
+
       })
-   
+
       return () => {
          unsubscribe();
       }
