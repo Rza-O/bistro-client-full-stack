@@ -40,7 +40,7 @@ const Cart = () => {
       <div>
          <div className='flex justify-evenly mb-8'>
             <h2 className='text-3xl'>Total Orders: {cart.length}</h2>
-            <h2 className='text-3xl'>Total Price: {totalPrice}</h2>
+            <h2 className='text-3xl'>Total Price: {totalPrice.toFixed(2)}</h2>
             {cart.length ?
                <Link to='/dashboard/payment'>
                   <button className="btn bg-[#d1a054] text-white">Pay</button>
