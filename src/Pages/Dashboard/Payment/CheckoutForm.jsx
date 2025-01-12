@@ -4,27 +4,31 @@ import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import useCart from '../../../Hooks/useCart';
 import useAuth from '../../../Hooks/useAuth';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const CheckoutForm = () => {
 
    const [error, setError] = useState('');
    const axiosSecure = useAxiosSecure();
    const { user } = useAuth();
+   const navigate = useNavigate();
 
    const stripe = useStripe();
    const elements = useElements();
    const [clientSecret, setClientSecret] = useState('');
    const [transactionId, setTransactionId] = useState('');
 
-   const [cart] = useCart();
+   const [cart, refetch] = useCart();
    const totalPrice = cart.reduce((total, item) => total + item.price, 0)
 
    useEffect(() => {
-      axiosSecure.post('/create-payment-intent', { price: totalPrice })
-         .then(res => {
-            console.log(res.data.clientSecret);
-            setClientSecret(res.data.clientSecret);
-         })
+      if (totalPrice > 0) {
+         axiosSecure.post('/create-payment-intent', { price: totalPrice })
+            .then(res => {
+               console.log(res.data.clientSecret);
+               setClientSecret(res.data.clientSecret);
+            })
+      }
 
    }, [axiosSecure, totalPrice]);
 
@@ -71,7 +75,7 @@ const CheckoutForm = () => {
          console.log('payment intent: ', paymentIntent);
          if (paymentIntent.status) {
             setTransactionId(paymentIntent.id);
-            toast.success('Payment has be received')
+            
             console.log(paymentIntent.id)
 
             // now save the payment in the db
@@ -87,7 +91,11 @@ const CheckoutForm = () => {
 
             const { data } = await axiosSecure.post('/payments', payment);
             console.log('payment saved!', data);
-
+            refetch();
+            if (data?.paymentResult?.insertedId) {
+               toast.success('Payment has be received')
+               navigate('/dashboard/paymentHistory')
+            }
          }
       }
    }
@@ -110,7 +118,7 @@ const CheckoutForm = () => {
             }}
          />
          <div className='flex justify-center items-center'>
-            <button disabled={!stripe || !clientSecret} className='btn btn-primary' type="submit">
+            <button disabled={!stripe || !clientSecret || !totalPrice} className='btn btn-primary' type="submit">
                Pay
             </button>
          </div>
